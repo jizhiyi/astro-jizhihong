@@ -1,0 +1,22 @@
+---
+// 基础布局 - HTML 骨架
+import Head from "@/components/Head.astro";
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Astro Blog" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <Head title={title} description={description}>
+    <slot name="head" />
+  </Head>
+  <body>
+    <slot />
+  </body>
+</html>

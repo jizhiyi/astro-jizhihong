@@ -1,0 +1,4 @@
+.astro
+.git
+node_modules
+pnpm-lock.yaml
