@@ -7,6 +7,10 @@
   --color-foreground: var(--foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
 }
 
 :root {
@@ -14,6 +18,10 @@
   --foreground: oklch(0.145 0 0);
   --border: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+  --primary: oklch(0.6 0.2 250);
+  --primary-foreground: oklch(1 0 0);
+  --muted: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.556 0 0);
 }
 
 .dark {
@@ -21,6 +29,10 @@
   --foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
   --ring: oklch(0.556 0 0);
+  --primary: oklch(0.7 0.2 260);
+  --primary-foreground: oklch(0.145 0 0);
+  --muted: oklch(0.7 0 0);
+  --muted-foreground: oklch(0.7 0 0);
 }
 
 @layer base {

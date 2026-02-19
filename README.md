@@ -1,43 +1,36 @@
-# Astro Starter Kit: Minimal
+# Astro Blog
 
-```sh
-pnpm create astro@latest -- --template minimal
+基于 Astro + Tailwind CSS 的个人博客。
+
+## 技术栈
+
+- Astro 5.0
+- Tailwind CSS
+- Astro Content Collections
+
+## 项目结构
+
+```
+src/
+├── components/        # UI 组件
+├── content/blog/      # 博客文章
+├── layouts/          # 布局组件
+├── pages/            # 页面路由
+└── styles/          # 全局样式
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 开发命令
 
-## 🚀 Project Structure
+| 命令           | 说明           |
+| -------------- | -------------- |
+| `pnpm dev`     | 启动开发服务器 |
+| `pnpm build`   | 构建生产版本   |
+| `pnpm preview` | 预览生产版本   |
 
-Inside of your Astro project, you'll see the following folders and files:
+## 文档
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+详细开发文档见 `doc/` 目录：
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [开发策略](./doc/01-development-strategy.md)
+- [Content Collections 配置](./doc/02-content-collections.md)
+- [基础 UI 组件](./doc/03-ui-components.md)

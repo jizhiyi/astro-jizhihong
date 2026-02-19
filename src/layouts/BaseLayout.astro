@@ -1,6 +1,7 @@
 ---
-// 基础布局 - HTML 骨架
+import Footer from "@/components/Footer.astro";
 import Head from "@/components/Head.astro";
+import Header from "@/components/Header.astro";
 import "@/styles/global.css";
 
 interface Props {
@@ -16,7 +17,11 @@ const { title, description = "Astro Blog" } = Astro.props;
   <Head title={title} description={description}>
     <slot name="head" />
   </Head>
-  <body>
-    <slot />
+  <body class="flex min-h-screen flex-col">
+    <Header />
+    <main class="container mx-auto flex-1 px-4 py-8">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
