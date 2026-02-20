@@ -1,19 +1,30 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getSortedPosts } from "@/lib/content/blog-utils";
+import { getCategories, getSortedPosts } from "@/lib/content/blog-utils";
 import type { Page, PaginateFunction } from "astro";
 import type { CollectionEntry } from "astro:content";
 
-type Props = {
-  page: Page<CollectionEntry<"blog">>;
-};
-
 export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
-  const posts = await getSortedPosts();
-  return paginate(posts, { pageSize: 6 });
+  const categories = await getCategories();
+  const allPosts = await getSortedPosts();
+
+  // 为每个分类创建分页
+  return categories.flatMap(([category]) => {
+    const categoryPosts = allPosts.filter(post => post.data.category === category);
+    return paginate(categoryPosts, {
+      params: { slug: category, page: undefined },
+      props: { category },
+      pageSize: 6,
+    });
+  });
 }
 
-const { page } = Astro.props;
+type Props = {
+  page: Page<CollectionEntry<"blog">>;
+  category: string;
+};
+
+const { page, category } = Astro.props;
 
 function formatDate(date: Date) {
   return date.toLocaleDateString("zh-CN", {
@@ -24,10 +35,19 @@ function formatDate(date: Date) {
 }
 ---
 
-<BaseLayout title="Astro Blog" description="我的技术博客">
+<BaseLayout title={`${category} - 分类`} description={`${category}分类下的文章`}>
   <section class="mb-12">
-    <h1 class="mb-4 text-4xl font-bold">欢迎来到我的博客</h1>
-    <p class="text-muted-foreground">分享技术笔记、生活感悟和学习心得</p>
+    <a
+      href="/category"
+      class="text-muted-foreground hover:text-primary mb-4 inline-flex items-center transition-colors"
+    >
+      <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      返回分类
+    </a>
+    <h1 class="mb-4 text-4xl font-bold">{category}</h1>
+    <p class="text-muted-foreground">{page.total} 篇文章</p>
   </section>
 
   <section>
@@ -38,11 +58,7 @@ function formatDate(date: Date) {
             <a href={`/blog/${post.id}`} class="block">
               <h3 class="hover:text-primary mb-2 text-xl font-semibold">{post.data.title}</h3>
               <p class="text-muted-foreground mb-3">{post.data.description}</p>
-              <div class="text-muted-foreground/80 flex items-center gap-4 text-sm">
-                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-                {/* TODO: 后续应该跳转到标签页 */}
-                {post.data.category && <span class="bg-muted rounded px-2 py-1">{post.data.category}</span>}
-              </div>
+              <time class="text-muted-foreground/80 text-sm">{formatDate(post.data.pubDate)}</time>
             </a>
           </li>
         ))
