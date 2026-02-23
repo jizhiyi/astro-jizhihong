@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 // Head 组件 - 支持插槽自定义
 interface Props {
   title: string;
@@ -15,4 +17,6 @@ const { title, description = "Astro Blog" } = Astro.props;
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <slot />
+
+  <ClientRouter />
 </head>

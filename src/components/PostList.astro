@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  posts: CollectionEntry<"blog">[];
+  showCategory?: boolean;
+};
+
+const { posts, showCategory = false } = Astro.props;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("zh-CN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<ul class="space-y-6">
+  {
+    posts.map(post => (
+      <li class="rounded-lg border p-6 transition-shadow hover:shadow-md">
+        <a href={`/blog/${post.id}`} class="block">
+          <h3 class="hover:text-primary mb-2 text-xl font-semibold">{post.data.title}</h3>
+          <p class="text-muted-foreground mb-3">{post.data.description}</p>
+          <div class="text-muted-foreground/80 flex items-center gap-4 text-sm">
+            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+            {showCategory && post.data.category && (
+              <a
+                href={`/category/${post.data.category}-1`}
+                class="bg-muted hover:bg-muted/80 rounded px-2 py-1 transition-colors"
+              >
+                {post.data.category}
+              </a>
+            )}
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>

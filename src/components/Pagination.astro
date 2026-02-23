@@ -1,0 +1,31 @@
+---
+import type { Page } from "astro";
+type Props = {
+  page: Page;
+};
+const { page } = Astro.props;
+---
+
+<nav class="mt-12 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+  <div class="justify-self-end">
+    {
+      page.url.prev ? (
+        <a href={page.url.prev} class="bg-muted hover:bg-muted/80 rounded px-4 py-2">
+          上一页
+        </a>
+      ) : null
+    }
+  </div>
+  <span class="px-4 py-2">
+    {page.currentPage} / {page.lastPage}
+  </span>
+  <div class="justify-self-start">
+    {
+      page.url.next ? (
+        <a href={page.url.next} class="bg-muted hover:bg-muted/80 rounded px-4 py-2">
+          下一页
+        </a>
+      ) : null
+    }
+  </div>
+</nav>
