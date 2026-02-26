@@ -1,20 +1,25 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+
 const navItems = [{ href: "/category", label: "分类" }];
 ---
 
 <header class="border-border border-b">
   <nav class="container mx-auto flex items-center justify-between px-4 py-4">
     <a href="/" class="text-xl font-bold">My Blog</a>
-    <ul class="flex gap-6">
-      {
-        navItems.map(item => (
-          <li>
-            <a href={item.href} class="hover:text-primary transition-colors">
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="flex items-center gap-6">
+      <ul class="flex gap-6">
+        {
+          navItems.map(item => (
+            <li>
+              <a href={item.href} class="hover:text-primary transition-colors">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <ThemeToggle transition:persist />
+    </div>
   </nav>
 </header>
